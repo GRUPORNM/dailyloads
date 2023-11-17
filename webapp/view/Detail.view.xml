@@ -1,0 +1,122 @@
+<mvc:View controllerName="dailyloads.controller.Detail"
+    xmlns="sap.uxap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:grid="sap.ui.layout"
+    xmlns:main="sap.ui.webc.main"
+    xmlns:commons="sap.suite.ui.commons">
+
+    <ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" alwaysShowContentHeader="false" preserveHeaderStateOnScroll="false" headerContentPinnable="true" isChildPage="true" upperCaseAnchorBar="false">
+        <headerTitle>
+            <ObjectPageDynamicHeaderTitle>
+
+                <navigationActions>
+                    <m:OverflowToolbarButton type="Transparent" icon="sap-icon://full-screen" press="toggleFullScreen" id="enterFullScreenBtn" visible="{= ${/actionButtonsInfo/midColumn/fullScreen} !== null }"/>
+                    <m:OverflowToolbarButton type="Transparent" icon="sap-icon://decline" press="onCloseDetailPress" visible="{= ${/actionButtonsInfo/midColumn/closeColumn} !== null }"/>
+                </navigationActions>
+
+            </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+            <commons:ProcessFlow id="processflow2" scrollable="false" nodes="{pf2>/nodes}" lanes="{detailView>/lanes}">
+                <commons:nodes>
+                    <commons:ProcessFlowNode laneId="{pf2>lane}" nodeId="{pf2>id}" title="{pf2>title}" children="{pf2>children}" state="{pf2>state}" stateText="{pf2>stateText}" texts="{pf2>texts}" focused="{pf2>focused}" />
+                </commons:nodes>
+
+                <commons:lanes>
+                    <commons:ProcessFlowLaneHeader laneId="{detailView>id}" iconSrc="{detailView>icon}" text="{detailView>label}" position="{detailView>position}" state="{detailView>state}" />
+                </commons:lanes>
+            </commons:ProcessFlow>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection titleUppercase="false" title="{i18n>general}">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <form:SimpleForm id="SimpleFormLoad" minWidth="1024" labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="2" columnsM="2" maxContainerCols="2" editable="false">
+                                <f:toolbar>
+                                    <m:Toolbar id="TB1">
+                                        <m:Title id="Title1" text="{i18n>general}"/>
+                                        <m:ToolbarSpacer />
+                                        <m:Button id="btGetLoad" type="Emphasized" text="{path : 'driver_no', formatter: '.formatter.assumeload'}" press="onPressGetLoad" />
+                                    </m:Toolbar>
+                                </f:toolbar>
+                                <m:Label text="{i18n>transport_type}" />
+                                <m:Text text="{transport_type}" />
+
+                                <m:Label text="{i18n>dataprevistacarregamento}" />
+                                <m:Text text="{path : 'dataprevistacarregamento', formatter: '.formatter.dateFormat'}" />
+                            </form:SimpleForm>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="{i18n>load}">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Table id="ShipsLoads" width="100%" class="sapFDynamicPageAlignContent" items="{to_ShipsLoads}" busyIndicatorDelay="{appView>/delay}" selectionChange="onSelectionChange">
+                                <m:headerToolbar>
+                                    <m:OverflowToolbar>
+                                    </m:OverflowToolbar>
+                                </m:headerToolbar>
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Text text="{i18n>commercial_prod}" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="{i18n>product_quantity}" />
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:ObjectIdentifier text="{maktx}" />
+                                            <m:ObjectIdentifier text="{quantprodcomercial} {unidademedida}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+
+            <ObjectPageSection titleUppercase="false" title="{i18n>destination}">
+                <subSections>
+                    <ObjectPageSubSection titleUppercase="false">
+                        <blocks>
+                            <m:Table id="ShipsDestination" width="100%" class="sapFDynamicPageAlignContent" items="{to_ShipsDestination}" busyIndicatorDelay="{appView>/delay}" selectionChange="onSelectionChange">
+                                <m:columns>
+                                    <m:Column>
+                                        <m:Text text="{i18n>name}" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="{i18n>location}" />
+                                    </m:Column>
+                                    <m:Column>
+                                        <m:Text text="{i18n>cpostal}" />
+                                    </m:Column>
+                                </m:columns>
+                                <m:items>
+                                    <m:ColumnListItem>
+                                        <m:cells>
+                                            <m:ObjectIdentifier text="{nome}" />
+                                            <m:ObjectIdentifier text="{localidade}" />
+                                            <m:ObjectIdentifier text="{cpostal}" />
+                                        </m:cells>
+                                    </m:ColumnListItem>
+                                </m:items>
+                            </m:Table>
+                        </blocks>
+                    </ObjectPageSubSection>
+                </subSections>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="./sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="TQA.DAILY_LOADS_SRV" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <EntityType Name="xTQAxDAILY_LOADS_DDType" sap:label="Data Definition for Daily Loads" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="load_order"/>
+                </Key>
+                <Property Name="load_order" Type="Edm.Guid" Nullable="false" sap:label="Load Order No."/>
+                <Property Name="nrordemcliente" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Customer Order No." sap:quickinfo="Customer Order"/>
+                <Property Name="codinstalacao" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="codcliente" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Cod Cliente" sap:quickinfo="Customer"/>
+                <Property Name="dataprevistacarregamento" Type="Edm.DateTimeOffset" Precision="0" sap:label="Planned Load Date"/>
+                <Property Name="regime_alfandegario" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Customs Procedure"/>
+                <Property Name="isencao_isp" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="ISP Exemption"/>
+                <Property Name="nacionalidade_motorista" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Driver Nationality"/>
+                <Property Name="matricula" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Plate"/>
+                <Property Name="carta_conducao" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="ISP Exemption" sap:quickinfo="Driver Driving License"/>
+                <Property Name="transport_type" Type="Edm.String" MaxLength="20" sap:label="Load Type" sap:quickinfo="Description"/>
+                <Property Name="vsartxt" Type="Edm.String" MaxLength="20" sap:label="Description" sap:quickinfo="Shipping Type Description"/>
+                <Property Name="nsei" Type="Edm.String" MaxLength="60" sap:label="Short Description" sap:quickinfo="Short Text for Fixed Values"/>
+                <NavigationProperty Name="to_ShipsDestination" Relationship="TQA.DAILY_LOADS_SRV.assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E" FromRole="FromRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E" ToRole="ToRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E"/>
+                <NavigationProperty Name="to_ShipsLoads" Relationship="TQA.DAILY_LOADS_SRV.assoc_8BA6665B448687BF3E745DF5C266B8EB" FromRole="FromRole_assoc_8BA6665B448687BF3E745DF5C266B8EB" ToRole="ToRole_assoc_8BA6665B448687BF3E745DF5C266B8EB"/>
+                <NavigationProperty Name="to_ShipsUnits" Relationship="TQA.DAILY_LOADS_SRV.assoc_813DE2645BF78177ADCFBF52C988E806" FromRole="FromRole_assoc_813DE2645BF78177ADCFBF52C988E806" ToRole="ToRole_assoc_813DE2645BF78177ADCFBF52C988E806"/>
+            </EntityType>
+            <EntityType Name="xTQAxSHIPS_DESTINATION_DDType" sap:label="Data Definition for Shipment Destination" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="load_order"/>
+                    <PropertyRef Name="codcompartimento"/>
+                </Key>
+                <Property Name="load_order" Type="Edm.Guid" Nullable="false" sap:label="Load Order No."/>
+                <Property Name="codcompartimento" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative" sap:label="Compartment Code"/>
+                <Property Name="nr_ordem_cliente" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Customer Order"/>
+                <Property Name="nome" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Name"/>
+                <Property Name="nif" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="NIF"/>
+                <Property Name="cpostal" Type="Edm.String" MaxLength="8" sap:display-format="UpperCase" sap:label="Postal Code"/>
+                <Property Name="localidade" Type="Edm.String" MaxLength="50" sap:display-format="UpperCase" sap:label="Location"/>
+                <Property Name="vbeln" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery"/>
+            </EntityType>
+            <EntityType Name="xTQAxSHIPS_LOADS_DDType" sap:label="Data Definition for Shipments Loads" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="load_order"/>
+                    <PropertyRef Name="codcompartimento"/>
+                </Key>
+                <Property Name="load_order" Type="Edm.Guid" Nullable="false" sap:label="Load Order No."/>
+                <Property Name="codcompartimento" Type="Edm.String" Nullable="false" MaxLength="16" sap:display-format="NonNegative" sap:label="Compartment Code"/>
+                <Property Name="nr_ordem_cliente" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Customer Order"/>
+                <Property Name="vbeln" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Delivery"/>
+                <Property Name="codconta" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Account Code"/>
+                <Property Name="codprodcomercial" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Commercial Prod. Cod" sap:quickinfo="Commercial Product Code"/>
+                <Property Name="quantprodcomercial" Type="Edm.Decimal" Precision="10" Scale="2" sap:label="Product Quantity" sap:quickinfo="Commercial Product Quantity"/>
+                <Property Name="unidademedida" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Unit of Measure"/>
+            </EntityType>
+            <EntityType Name="xTQAxSHIPS_UNITS_DDType" sap:label="Data Definition for Shipments Units" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="load_order"/>
+                </Key>
+                <Property Name="load_order" Type="Edm.Guid" Nullable="false" sap:label="Load Order No."/>
+                <Property Name="matricula" Type="Edm.String" MaxLength="16" sap:display-format="UpperCase" sap:label="Plate"/>
+            </EntityType>
+            <Association Name="assoc_8BA6665B448687BF3E745DF5C266B8EB" sap:content-version="1">
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxDAILY_LOADS_DDType" Multiplicity="1" Role="FromRole_assoc_8BA6665B448687BF3E745DF5C266B8EB"/>
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_LOADS_DDType" Multiplicity="*" Role="ToRole_assoc_8BA6665B448687BF3E745DF5C266B8EB"/>
+            </Association>
+            <Association Name="assoc_813DE2645BF78177ADCFBF52C988E806" sap:content-version="1">
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxDAILY_LOADS_DDType" Multiplicity="1" Role="FromRole_assoc_813DE2645BF78177ADCFBF52C988E806"/>
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_UNITS_DDType" Multiplicity="*" Role="ToRole_assoc_813DE2645BF78177ADCFBF52C988E806"/>
+            </Association>
+            <Association Name="assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E" sap:content-version="1">
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxDAILY_LOADS_DDType" Multiplicity="1" Role="FromRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E"/>
+                <End Type="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_DESTINATION_DDType" Multiplicity="*" Role="ToRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E"/>
+            </Association>
+            <EntityContainer Name="TQA_DAILY_LOADS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="xTQAxDAILY_LOADS_DD" EntityType="TQA.DAILY_LOADS_SRV.xTQAxDAILY_LOADS_DDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="xTQAxSHIPS_DESTINATION_DD" EntityType="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_DESTINATION_DDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="xTQAxSHIPS_LOADS_DD" EntityType="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_LOADS_DDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="xTQAxSHIPS_UNITS_DD" EntityType="TQA.DAILY_LOADS_SRV.xTQAxSHIPS_UNITS_DDType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_813DE2645BF78177ADCFBF52C988E806" Association="TQA.DAILY_LOADS_SRV.assoc_813DE2645BF78177ADCFBF52C988E806" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="xTQAxDAILY_LOADS_DD" Role="FromRole_assoc_813DE2645BF78177ADCFBF52C988E806"/>
+                    <End EntitySet="xTQAxSHIPS_UNITS_DD" Role="ToRole_assoc_813DE2645BF78177ADCFBF52C988E806"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E" Association="TQA.DAILY_LOADS_SRV.assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="xTQAxDAILY_LOADS_DD" Role="FromRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E"/>
+                    <End EntitySet="xTQAxSHIPS_DESTINATION_DD" Role="ToRole_assoc_1E6F39B2F8BE1CA24CA1C5B00274EC0E"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_8BA6665B448687BF3E745DF5C266B8EB" Association="TQA.DAILY_LOADS_SRV.assoc_8BA6665B448687BF3E745DF5C266B8EB" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="xTQAxDAILY_LOADS_DD" Role="FromRole_assoc_8BA6665B448687BF3E745DF5C266B8EB"/>
+                    <End EntitySet="xTQAxSHIPS_LOADS_DD" Role="ToRole_assoc_8BA6665B448687BF3E745DF5C266B8EB"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotations Target="TQA.DAILY_LOADS_SRV.TQA_DAILY_LOADS_SRV_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <atom:link rel="self" href="http://erpdev.rnm.local:50000/sap/opu/odata/tqa/DAILY_LOADS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="http://erpdev.rnm.local:50000/sap/opu/odata/tqa/DAILY_LOADS_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

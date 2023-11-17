@@ -1,0 +1,34 @@
+<mvc:View controllerName="dailyloads.controller.List"
+    xmlns="sap.m"
+    xmlns:semantic="sap.f.semantic"
+    xmlns:mvc="sap.ui.core.mvc">
+
+    <semantic:SemanticPage id="listPage" preserveHeaderStateOnScroll="true" toggleHeaderOnTitleClick="false">
+        <semantic:titleHeading>
+            <Title id="listPageTitle" text="{listView>/title}" />
+        </semantic:titleHeading>
+        <semantic:content>
+            <List id="list" width="auto" noData="{i18n>noDataText}" class="sapFDynamicPageAlignContent" items="{/xTQAxDAILY_LOADS_DD}" busyIndicatorDelay="{listView>/delay}" noDataText="{listView>/noDataText}" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <layoutData>
+                            <OverflowToolbarLayoutData minWidth="150px" maxWidth="240px" shrinkable="true" priority="NeverOverflow"/>
+                        </layoutData>
+                        <ToolbarSpacer/>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <items>
+                    <ObjectListItem type="Navigation" icon="sap-icon://shipping-status" press=".onSelectionChange" title="{i18n>delivery} ({delivery})" number="{cod_instalacao}">
+                        <firstStatus>
+                            <ObjectStatus text="{path : 'driver_no', formatter: '.formatter.driverid'}" state="{path : 'driver_no', formatter: '.formatter.stateLoad'}"/>
+                        </firstStatus>
+                        <attributes>
+                            <ObjectAttribute text="{i18n>transport_type}: {transport_load}"/>
+                            <ObjectAttribute text="{i18n>destination}: {destination}"/>
+                        </attributes>
+                    </ObjectListItem>
+                </items>
+            </List>
+        </semantic:content>
+    </semantic:SemanticPage>
+</mvc:View>
