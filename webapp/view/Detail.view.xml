@@ -42,7 +42,6 @@
                                     <m:Toolbar id="TB1">
                                         <m:Title id="Title1" text="{i18n>general}"/>
                                         <m:ToolbarSpacer />
-                                        <m:Button id="btGetLoad" type="Emphasized" text="{path : 'driver_no', formatter: '.formatter.assumeload'}" press="onPressGetLoad" />
                                     </m:Toolbar>
                                 </f:toolbar>
                                 <m:Label text="{i18n>transport_type}" />
