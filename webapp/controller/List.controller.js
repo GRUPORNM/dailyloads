@@ -37,7 +37,7 @@ sap.ui.define([
                     this.getOwnerComponent().oListSelector.setBoundList(oList);
                 }.bind(this)
             });
-
+            sessionStorage.setItem("goToLaunchpad", "X");
             this.getRouter().attachRouteMatched(this.getUserAuthentication, this);
             this.getRouter().getRoute("list").attachPatternMatched(this._onMasterMatched, this);
             this.getRouter().attachBypassed(this.onBypassed, this);
