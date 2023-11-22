@@ -44,6 +44,7 @@ sap.ui.define([
         },
 
         onAfterRendering: function () {
+            sessionStorage.setItem("goToLaunchpad", "X");
             var oStartDate = new Date();
             oStartDate.setHours(1, 0, 0, 0);
 
@@ -54,6 +55,12 @@ sap.ui.define([
             var oDateFilter = new Filter("dataprevistacarregamento", FilterOperator.BT, oStartDate, oEndDate);
 
             oList.getBinding("items").filter([oDateFilter]);
+
+            if (sessionStorage.getItem("selectedTheme").indexOf("dark") !== -1) {
+                jQuery(".sapUiBlockLayer, .sapUiLocalBusyIndicator").css("background-color", "rgba(28,34,40,0.99)");
+            } else {
+                jQuery(".sapUiBlockLayer, .sapUiLocalBusyIndicator").css("background-color", "rgba(255, 255, 255, 0.99)");
+            }
         },
 
         onUpdateFinished: function (oEvent) {
