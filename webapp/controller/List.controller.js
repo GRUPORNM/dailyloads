@@ -146,7 +146,7 @@ sap.ui.define([
 
         createGroupHeader: function (oGroup) {
             return new GroupHeaderListItem({
-                title: oGroup.text,
+                // title: oGroup.text,
                 upperCase: false
             });
         },
@@ -161,7 +161,7 @@ sap.ui.define([
                 isFilterBarVisible: false,
                 filterBarLabel: "",
                 delay: 0,
-                title: this.getResourceBundle().getText("listTitleCount", [0]),
+                // title: this.getResourceBundle().getText("listTitleCount", [0]),
                 noDataText: this.getResourceBundle().getText("noDataText"),
                 sortBy: "vsartxt",
                 groupBy: "None"
@@ -181,11 +181,11 @@ sap.ui.define([
         },
 
         _updateListItemCount: function (iTotalItems) {
-            var sTitle;
-            if (this._oList.getBinding("items").isLengthFinal()) {
-                sTitle = this.getResourceBundle().getText("listTitleCount", [iTotalItems]);
-                this.getModel("listView").setProperty("/title", sTitle);
-            }
+            // var sTitle;
+            // if (this._oList.getBinding("items").isLengthFinal()) {
+            //     sTitle = this.getResourceBundle().getText("listTitleCount", [iTotalItems]);
+            //     this.getModel("listView").setProperty("/title", sTitle);
+            // }
         },
 
         _applyFilterSearch: function () {

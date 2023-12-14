@@ -28,162 +28,153 @@ sap.ui.define([
 
         onLadesLoad: function (sObjectPath) {
             var oModel = this.getModel();
+            var oObject = this.getView().getModel().getObject(sObjectPath);
 
-            oModel.read(sObjectPath, {
-                success: function (oData, response) {
-                    var dateProperties = ['dtdis', 'dareg', 'dalbg', 'dalen', 'dtabf', 'datbg', 'daten'];
+            var dateProperties = ['dtdis', 'dareg', 'dalbg', 'dalen', 'dtabf', 'datbg', 'daten'];
 
-                    var formattedDates = {};
+            var formattedDates = {};
 
-                    dateProperties.forEach(function (prop) {
-                        var dateValue = oData[prop];
+            dateProperties.forEach(function (prop) {
+                var dateValue = oObject[prop];
 
-                        formattedDates[prop] = "";
+                formattedDates[prop] = "";
 
-                        if (dateValue instanceof Date) {
-                            formattedDates[prop] = sap.ui.core.format.DateFormat.getDateInstance({ pattern: "dd.MM.yyyy" }).format(dateValue);
-                        }
-                    });
-
-                    if (oData) {
-                        var aLanes = [
-                            {
-                                "id": "0",
-                                "icon": "sap-icon://accelerated",
-                                "label": this.getResourceBundle().getText("planning") + formattedDates.dtdis,
-                                "position": 0,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 10
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "1",
-                                "icon": "sap-icon://order-status",
-                                "label": this.getResourceBundle().getText("registration") + formattedDates.dareg,
-                                "position": 1,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 20
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "2",
-                                "icon": "sap-icon://sap-box",
-                                "label": this.getResourceBundle().getText("startloading") + formattedDates.dalbg,
-                                "position": 2,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 35
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "3",
-                                "icon": "sap-icon://sap-box",
-                                "label": this.getResourceBundle().getText("endloading") + formattedDates.dalen,
-                                "position": 3,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 45
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "4",
-                                "icon": "sap-icon://monitor-payments",
-                                "label": this.getResourceBundle().getText("procedure") + formattedDates.dtabf,
-                                "position": 4,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 55
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "5",
-                                "icon": "sap-icon://shipping-status",
-                                "label": this.getResourceBundle().getText("starttransportation") + formattedDates.datbg,
-                                "position": 5,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 65
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "6",
-                                "icon": "sap-icon://shipping-status",
-                                "label": this.getResourceBundle().getText("endtransportation") + formattedDates.daten,
-                                "position": 6,
-                                "state": [
-                                    {
-                                        "state": "",
-                                        "value": 75
-                                    }
-                                ]
-                            },
-                        ];
-
-                        var oSttrg = oData.sttrg;
-                        if (oSttrg < 0) {
-                            aLanes.forEach(oLane => {
-                                oLane.state[0].state = "Critical";
-                            });
-                        }
-                        else if (oSttrg == '7') {
-                            aLanes.forEach(oLane => {
-                                oLane.state[0].state = "Positive";
-                            });
-                        }
-                        else if (oSttrg != '7') {
-                            for (let i = 0; i <= oSttrg; i++) {
-                                aLanes[i].state[0].state = "Positive";
-                            }
-
-                            for (let l = oSttrg; l <= aLanes.length - 1; l++) {
-                                aLanes[l].state[0].state = "Critical";
-                            }
-                        } else {
-                            aLanes.forEach(oLane => {
-                                oLane.state[0].state = "Neutral";
-                            });
-                        }
-
-                        var oViewModel = this.getModel("detailView");
-
-                        oViewModel.setProperty("/lanes", aLanes);
-
-                        var lanes = this.getModel("detailView").getProperty("/lanes"),
-                            foundPositive = false,
-                            canEdit = true;
-
-                        for (var i = 1; i < lanes.length; i++) {
-                            if (lanes[i].state[0].state === 'Positive') {
-                                foundPositive = true;
-                                canEdit = false;
-                                break;
-                            }
-                        }
-
-                        if (canEdit) {
-                            this.byId("btGetLoad").setProperty("enabled", true);
-                        } else {
-                            this.byId("btGetLoad").setProperty("enabled", false);
-                        }
-
-                        oViewModel.updateBindings();
-                    }
-                }.bind(this)
+                if (dateValue instanceof Date) {
+                    formattedDates[prop] = sap.ui.core.format.DateFormat.getDateInstance({ pattern: "dd.MM.yyyy" }).format(dateValue);
+                }
             });
+
+            if (oObject) {
+                var aLanes = [
+                    {
+                        "id": "0",
+                        "icon": "sap-icon://accelerated",
+                        "label": this.getResourceBundle().getText("planning") + formattedDates.dtdis,
+                        "position": 0,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 10
+                            }
+                        ]
+                    },
+                    {
+                        "id": "1",
+                        "icon": "sap-icon://order-status",
+                        "label": this.getResourceBundle().getText("registration") + formattedDates.dareg,
+                        "position": 1,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 20
+                            }
+                        ]
+                    },
+                    {
+                        "id": "2",
+                        "icon": "sap-icon://sap-box",
+                        "label": this.getResourceBundle().getText("startloading") + formattedDates.dalbg,
+                        "position": 2,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 35
+                            }
+                        ]
+                    },
+                    {
+                        "id": "3",
+                        "icon": "sap-icon://sap-box",
+                        "label": this.getResourceBundle().getText("endloading") + formattedDates.dalen,
+                        "position": 3,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 45
+                            }
+                        ]
+                    },
+                    {
+                        "id": "4",
+                        "icon": "sap-icon://monitor-payments",
+                        "label": this.getResourceBundle().getText("procedure") + formattedDates.dtabf,
+                        "position": 4,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 55
+                            }
+                        ]
+                    },
+                    {
+                        "id": "5",
+                        "icon": "sap-icon://shipping-status",
+                        "label": this.getResourceBundle().getText("starttransportation") + formattedDates.datbg,
+                        "position": 5,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 65
+                            }
+                        ]
+                    },
+                    {
+                        "id": "6",
+                        "icon": "sap-icon://shipping-status",
+                        "label": this.getResourceBundle().getText("endtransportation") + formattedDates.daten,
+                        "position": 6,
+                        "state": [
+                            {
+                                "state": "",
+                                "value": 75
+                            }
+                        ]
+                    },
+                ];
+
+                var oSttrg = oObject.sttrg;
+                if (oSttrg < 0) {
+                    aLanes.forEach(oLane => {
+                        oLane.state[0].state = "Critical";
+                    });
+                }
+                else if (oSttrg == '7') {
+                    aLanes.forEach(oLane => {
+                        oLane.state[0].state = "Positive";
+                    });
+                }
+                else if (oSttrg != '7') {
+                    for (let i = 0; i <= oSttrg; i++) {
+                        aLanes[i].state[0].state = "Positive";
+                    }
+
+                    for (let l = oSttrg; l <= aLanes.length - 1; l++) {
+                        aLanes[l].state[0].state = "Critical";
+                    }
+                } else {
+                    aLanes.forEach(oLane => {
+                        oLane.state[0].state = "Neutral";
+                    });
+                }
+
+                var oViewModel = this.getModel("detailView");
+
+                oViewModel.setProperty("/lanes", aLanes);
+
+                var lanes = this.getModel("detailView").getProperty("/lanes"),
+                    foundPositive = false,
+                    canEdit = true;
+
+                for (var i = 1; i < lanes.length; i++) {
+                    if (lanes[i].state[0].state === 'Positive') {
+                        foundPositive = true;
+                        canEdit = false;
+                        break;
+                    }
+                }
+
+                oViewModel.updateBindings();
+            }
         },
 
         onSendEmailPress: function () {
@@ -194,19 +185,6 @@ sap.ui.define([
                 oViewModel.getProperty("/shareSendEmailSubject"),
                 oViewModel.getProperty("/shareSendEmailMessage")
             );
-        },
-
-        onSetEnableButton: function (sObjectPath) {
-            var oLoad = this.getModel().getObject(sObjectPath);
-            if (oLoad.driver_no == "") {
-                this.byId("btGetLoad").setProperty("visible", true);
-            } else {
-                if (sessionStorage.getItem("usrid") != oLoad.driver_no) {
-                    this.byId("btGetLoad").setProperty("visible", false);
-                } else {
-                    this.byId("btGetLoad").setProperty("visible", true);
-                }
-            }
         },
 
         onListUpdateFinished: function (oEvent) {
@@ -250,7 +228,6 @@ sap.ui.define([
                         oViewModel.setProperty("/busy", true);
                     },
                     dataReceived: function () {
-                        that.onSetEnableButton(sObjectPath);
                         oViewModel.setProperty("/busy", false);
                     }
                 }
