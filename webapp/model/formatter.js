@@ -48,6 +48,14 @@ sap.ui.define([], function () {
                 return this.getView().getModel("i18n").getResourceBundle().getText("getload");  
             }
         },
+
+        codcompartimento: function (oCompartimento) {
+            if (oCompartimento === null || oCompartimento === undefined) {
+                return "";
+            }
+
+            return oCompartimento.replace(/^0+/, '');
+        }
         
     };
 });

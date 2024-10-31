@@ -51,8 +51,8 @@ sap.ui.define([
             var oEndDate = new Date();
             oEndDate.setHours(23, 59, 59, 0);
 
-            var oList = this.getView().byId("list");
-            var oDateFilter = new Filter("dataprevistacarregamento", FilterOperator.BT, oStartDate, oEndDate);
+            var oList = this.getView().byId("list"),
+                oDateFilter = new Filter("dataprevistacarregamento", FilterOperator.BT, oStartDate, oEndDate);
 
             oList.getBinding("items").filter([oDateFilter]);
 
@@ -90,6 +90,7 @@ sap.ui.define([
 
         onOpenViewSettings: function (oEvent) {
             var sDialogTab = "filter";
+
             if (oEvent.getSource() instanceof sap.m.Button) {
                 var sButtonId = oEvent.getSource().getId();
                 if (sButtonId.match("sort")) {
@@ -114,7 +115,6 @@ sap.ui.define([
         },
 
         onConfirmViewSettingsDialog: function (oEvent) {
-
             this._applySortGroup(oEvent);
         },
 
@@ -146,7 +146,6 @@ sap.ui.define([
 
         createGroupHeader: function (oGroup) {
             return new GroupHeaderListItem({
-                // title: oGroup.text,
                 upperCase: false
             });
         },
@@ -155,13 +154,11 @@ sap.ui.define([
             history.go(-1);
         },
 
-
         _createViewModel: function () {
             return new JSONModel({
                 isFilterBarVisible: false,
                 filterBarLabel: "",
                 delay: 0,
-                // title: this.getResourceBundle().getText("listTitleCount", [0]),
                 noDataText: this.getResourceBundle().getText("noDataText"),
                 sortBy: "vsartxt",
                 groupBy: "None"
@@ -175,23 +172,23 @@ sap.ui.define([
         _showDetail: function (oItem) {
             var bReplace = !Device.system.phone;
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-            this.getRouter().navTo("object", {
-                objectId: oItem.getBindingContext().getProperty("load_order")
-            }, bReplace);
+            // this.getRouter().navTo("object", {
+            //     objectId: oItem.getBindingContext().getProperty("nrordemcliente")
+            // }, bReplace);
+            var sPath = oItem.getBindingContextPath();
+
+            this.onNavigation(sPath, "object", "/xTQAxDAILY_LOADS_DD");
         },
 
         _updateListItemCount: function (iTotalItems) {
-            // var sTitle;
-            // if (this._oList.getBinding("items").isLengthFinal()) {
-            //     sTitle = this.getResourceBundle().getText("listTitleCount", [iTotalItems]);
-            //     this.getModel("listView").setProperty("/title", sTitle);
-            // }
+
         },
 
         _applyFilterSearch: function () {
             var aFilters = this._oListFilterState.aSearch.concat(this._oListFilterState.aFilter),
                 oViewModel = this.getModel("listView");
             this._oList.getBinding("items").filter(aFilters, "Application");
+
             if (aFilters.length !== 0) {
                 oViewModel.setProperty("/noDataText", this.getResourceBundle().getText("listListNoDataWithFilterOrSearchText"));
             } else if (this._oListFilterState.aSearch.length > 0) {

@@ -27,12 +27,10 @@ sap.ui.define([
         },
 
         onLadesLoad: function (sObjectPath) {
-            var oModel = this.getModel();
-            var oObject = this.getView().getModel().getObject(sObjectPath);
-
-            var dateProperties = ['dtdis', 'dareg', 'dalbg', 'dalen', 'dtabf', 'datbg', 'daten'];
-
-            var formattedDates = {};
+            var oModel = this.getModel(),
+                oObject = this.getView().getModel().getObject(sObjectPath),
+                dateProperties = ['dtdis', 'dareg', 'dalbg', 'dalen', 'dtabf', 'datbg', 'daten'],
+                formattedDates = {};
 
             dateProperties.forEach(function (prop) {
                 var dateValue = oObject[prop];
@@ -205,18 +203,13 @@ sap.ui.define([
         _onObjectMatched: function (oEvent) {
             var sObjectId = oEvent.getParameter("arguments").objectId;
             this.getModel("appView").setProperty("/layout", "TwoColumnsMidExpanded");
-            this.getModel().metadataLoaded().then(function () {
-                var sObjectPath = this.getModel().createKey("xTQAxDAILY_LOADS_DD", {
-                    load_order: sObjectId
-                });
-                this._bindView("/" + sObjectPath);
-            }.bind(this));
+
+            this._bindView("/" + oEvent.getParameter("config").pattern.replace("/{objectId}", "") + oEvent.getParameter("arguments").objectId, true);
         },
 
         _bindView: function (sObjectPath, bForceRefresh) {
-            var that = this;
-            var oViewModel = this.getModel("detailView");
-            that.onLadesLoad(sObjectPath);
+            var that = this,
+                oViewModel = this.getModel("detailView");
 
             oViewModel.setProperty("/busy", false);
 
@@ -229,6 +222,7 @@ sap.ui.define([
                     },
                     dataReceived: function () {
                         oViewModel.setProperty("/busy", false);
+                        that.onLadesLoad(sObjectPath);
                     }
                 }
             });
@@ -289,6 +283,7 @@ sap.ui.define([
         toggleFullScreen: function () {
             var bFullScreen = this.getModel("appView").getProperty("/actionButtonsInfo/midColumn/fullScreen");
             this.getModel("appView").setProperty("/actionButtonsInfo/midColumn/fullScreen", !bFullScreen);
+
             if (!bFullScreen) {
                 this.getModel("appView").setProperty("/previousLayout", this.getModel("appView").getProperty("/layout"));
                 this.getModel("appView").setProperty("/layout", "MidColumnFullScreen");
@@ -299,7 +294,6 @@ sap.ui.define([
 
         onPressGetLoad: function () {
             var that = this;
-
             new sap.m.MessageBox.warning(this.getResourceBundle().getText("confirmText"), {
                 title: this.getResourceBundle().getText("confirmTitle"),
                 actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
@@ -313,8 +307,8 @@ sap.ui.define([
         },
 
         updateState: function () {
-            var oEntry = {};
-            var sPath = this.getView().getBindingContext().getPath(),
+            var oEntry = {},
+                sPath = this.getView().getBindingContext().getPath(),
                 oLoad = this.getModel().getObject(sPath),
                 oURLParams = new URLSearchParams(window.location.search),
                 oToken = oURLParams.get('token');

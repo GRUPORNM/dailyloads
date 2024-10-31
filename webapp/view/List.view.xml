@@ -3,7 +3,6 @@
     xmlns:f="sap.f"
     xmlns:semantic="sap.f.semantic"
     xmlns:mvc="sap.ui.core.mvc">
-
     <f:DynamicPage id="listPage" preserveHeaderStateOnScroll="false" toggleHeaderOnTitleClick="false">
         <f:content>
             <List id="list" width="auto" noData="{i18n>noDataText}" class="sapFDynamicPageAlignContent" items="{/xTQAxDAILY_LOADS_DD}" busyIndicatorDelay="{listView>/delay}" noDataText="{listView>/noDataText}" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished=".onUpdateFinished" selectionChange=".onSelectionChange">
@@ -16,7 +15,7 @@
                     </OverflowToolbar>
                 </headerToolbar>
                 <items>
-                    <ObjectListItem type="Navigation" icon="sap-icon://shipping-status" press=".onSelectionChange" title="{i18n>delivery} ({delivery})" number="{cod_instalacao}">
+                    <ObjectListItem type="Navigation" icon="sap-icon://shipping-status" press=".onSelectionChange" title="{i18n>delivery} ({nrordemcliente})" number="{cod_instalacao}">
                         <attributes>
                             <ObjectAttribute text="{i18n>transport_type}: {transport_load}"/>
                             <ObjectAttribute text="{i18n>dataprevistacarregamento}: {path : 'dataprevistacarregamento', formatter: '.formatter.dateFormat'}"/>

@@ -66,6 +66,9 @@
                                 </m:headerToolbar>
                                 <m:columns>
                                     <m:Column>
+                                        <m:Text text="{i18n>codcompartimento}" />
+                                    </m:Column>
+                                    <m:Column>
                                         <m:Text text="{i18n>commercial_prod}" />
                                     </m:Column>
                                     <m:Column>
@@ -75,6 +78,7 @@
                                 <m:items>
                                     <m:ColumnListItem>
                                         <m:cells>
+                                            <m:ObjectIdentifier text="{path : 'codcompartimento', formatter: '.formatter.codcompartimento'}" />
                                             <m:ObjectIdentifier text="{maktx}" />
                                             <m:ObjectIdentifier text="{quantprodcomercial} {unidademedida}" />
                                         </m:cells>
@@ -93,6 +97,9 @@
                             <m:Table id="ShipsDestination" width="100%" class="sapFDynamicPageAlignContent" items="{to_ShipsDestination}" busyIndicatorDelay="{appView>/delay}" selectionChange="onSelectionChange">
                                 <m:columns>
                                     <m:Column>
+                                        <m:Text text="{i18n>codcompartimento}" />
+                                    </m:Column>
+                                    <m:Column>
                                         <m:Text text="{i18n>name}" />
                                     </m:Column>
                                     <m:Column>
@@ -105,6 +112,7 @@
                                 <m:items>
                                     <m:ColumnListItem>
                                         <m:cells>
+                                            <m:ObjectIdentifier text="{path : 'codcompartimento', formatter: '.formatter.codcompartimento'}" />
                                             <m:ObjectIdentifier text="{nome}" />
                                             <m:ObjectIdentifier text="{localidade}" />
                                             <m:ObjectIdentifier text="{cpostal}" />
